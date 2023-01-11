@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@200;300;400;500;600&family=Montserrat:wght@100;200;300;400&family=Press+Start+2P&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+$lightBGcolor : #EDC7B7;
+$darkBgColor : #1A1A1D;
+$primary-color :$darkBgColor;
+$link-color1 : rgb(11, 158, 141);
+$link-color2 : rgb(245, 147, 18);
+
+
+body {
+    background: url(../../../public/bg.jpg) no-repeat;
+    background-size: cover;
+
+    color: $primary-color;
+}
+
+.news-container {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Inconsolata', monospace;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin: 0 5%;
+    margin-bottom: 4rem;
+
+
+    .news-wrapper {
+        box-shadow: rgba(52, 52, 52, 0.2) 0px 2px 8px 0px;
+        background-color: white;
+        padding: 1rem;
+        border-radius: 7px;
+
+        .news-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            font-family: 'Inconsolata', monospace;
+            font-weight: 400;
+            color: rgb(69, 66, 66);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+
+            .author-name {
+                font-weight: 600;
+                font-style: normal;
+                color: $primary-color;
+            }
+        }
+
+        .links {
+            display: flex;
+            justify-content: space-between;
+
+            .read-more {
+                color: $link-color1;
+                border-bottom: 1px solid $link-color1;
+            }
+
+            .remove-link {
+                cursor: pointer;
+                color: $darkBgColor;
+
+                .love-react {
+                    color: rgb(221, 35, 35);
+                }
+            }
+        }
+    }
+
+}
