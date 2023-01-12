@@ -1,38 +1,12 @@
 import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react';
-import NewsView from './NewsView';
 import './News.scss';
 import './LoadingAnimation.scss'
+import { useGlobalContext } from '../../Context';
+import ReactHeart from './ReactHeart';
 
+const News = () => {
 
-
-const News = ({ saveText, text, setText, setSaveText }) => {
-
-
-  let API = `http://hn.algolia.com/api/v1/search?query=${saveText}`;
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [apiData, setApiData] = useState();
-
-  useEffect(() => {
-    fetchApiData(API);
-  }, [saveText])
-
-
-  const fetchApiData = async (url) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const { hits } = data; //array destructuring
-      setApiData(hits);
-      console.log(hits);
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  }
+  const { hits, isLoading } = useGlobalContext();
 
   if (isLoading) {
     return (
@@ -40,14 +14,29 @@ const News = ({ saveText, text, setText, setSaveText }) => {
     )
   }
 
-
-
   return (
-    <div className='news-container'>
-      <NewsView data={apiData} saveText={saveText} text={text} setText={setText} setSaveText={setSaveText} />
+    <>
+      {
+        hits.map(({ objectID, title, author, num_comments, url }) => {
+          return (
+            <div className='news-container' key={objectID}>
+              <div className='news-wrapper' >
+                <h4 className='news-title'>{title}</h4>
+                <h4 className='author'>By <span className='author-name'>{author} | {num_comments}</span> comments</h4>
+                <div className="links">
+                  <a className='read-more' href={url} target="_blank">Read more</a>
+                  <ReactHeart />
+                </div>
+              </div>
+            </div>
+          )
+        })
+      }
 
-    </div>
+    </>
   )
 }
 
 export default News
+
+

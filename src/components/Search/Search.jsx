@@ -1,16 +1,16 @@
 import React from 'react';
+import { useGlobalContext } from '../../Context';
 import './Search.scss';
 
-const Search = ({setText,text,setSaveText}) => {
-  function handleFormSubmit(e){
-    setSaveText(text);
-    e.preventDefault();
-  }
+const Search = () => {
+  const { query, setSearch } = useGlobalContext();
   return (
     <div className="search-container">
-      <form onSubmit={handleFormSubmit} className="input">
-        <input onChange={e=>setText(e.target.value)}
-           type="text" placeholder='Eg: React' />
+      <form className="input">
+        <input
+          value={query}
+          onChange={(e) => setSearch(e.target.value)}
+          type="text" placeholder='Eg: React' />
       </form>
     </div>
   )

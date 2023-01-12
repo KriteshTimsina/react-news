@@ -1,11 +1,56 @@
 import React, { useContext } from "react";
+import { useEffect, useReducer } from "react";
 // import Search from "./components/Search/Search";
-
+import { reducer } from "./reducer";
 const AppContext = React.createContext(); //context creation
 
-const AppProvider = ({ children }) => { //provider function
+let API = `http://hn.algolia.com/api/v1/search?`;
+const initialValue = {
+    isLoading: true,
+    page: 0,
+    nbPages: 0,
+    query: "REACT",
+    hits: [],
+}
+
+const AppProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(reducer, initialValue);
+
+    const fetchApiData = async (url) => {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            dispatch(
+                {
+                    type: "FETCH_STORIES",
+                    payload: {
+                        hits: data.hits,
+                        nbPages: data.nbPages,
+                    }
+                })
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    function setSearch(searchQuery) {
+        dispatch({
+            type: "SET_SEARCH",
+            payload: searchQuery
+        })
+    }
+
+    useEffect(() => {
+        fetchApiData(`${API}query=${state.query}&page=${state.page}`);
+    }, [state.query])
+    //all business logic will be written here
+
+
+    //provider function
     return (
-        <AppContext.Provider value={"css"} >
+        <AppContext.Provider value={{ ...state, setSearch }} >
             {children}
         </AppContext.Provider>
     )

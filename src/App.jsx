@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import News from './components/News/News'
 import Pagination from './components/Pagination/Pagination'
@@ -7,16 +6,18 @@ import Search from './components/Search/Search'
 import { FiYoutube } from 'react-icons/fi';
 import './app.scss';
 
+
+
 const App = () => {
-  const [text, setText] = useState();
-  const [saveText, setSaveText] = useState("react");
+
   return (
     <>
       <Navbar />
-      <Search setText={setText} text={text} setSaveText={setSaveText} />
+      <Search />
       <Pagination />
-      <News setText={setText} saveText={saveText} text={text} setSaveText={setSaveText} />
+      <News />
       {/* <Footer /> */}
+
     </>
   )
 }
