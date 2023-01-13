@@ -42,15 +42,27 @@ const AppProvider = ({ children }) => {
         })
     }
 
+    //pagination
+    function handleNextChange() {
+        dispatch({
+            type: "INCREMENT"
+        })
+    }
+    function handlePreviousChange() {
+        dispatch({
+            type: "DECREMENT"
+        })
+    }
+
     useEffect(() => {
         fetchApiData(`${API}query=${state.query}&page=${state.page}`);
-    }, [state.query])
+    }, [state.query, state.page])
     //all business logic will be written here
 
 
     //provider function
     return (
-        <AppContext.Provider value={{ ...state, setSearch }} >
+        <AppContext.Provider value={{ ...state, setSearch, handleNextChange, handlePreviousChange }} >
             {children}
         </AppContext.Provider>
     )

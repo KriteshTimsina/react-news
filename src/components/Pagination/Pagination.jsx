@@ -1,16 +1,18 @@
 import React from 'react';
+import { useGlobalContext } from '../../Context';
 import './pagination.scss';
 
 export default function Pagination() {
+  const { handlePreviousChange, handleNextChange, page, nbPages } = useGlobalContext();
 
   return (
     <div className='pagination-container'>
-      <a className='toggle-btn' href="#">
+      <a onClick={handlePreviousChange} className='toggle-btn' href="#">
         Prev
       </a>
-      <pre>  1 of 50  </pre>
+      <pre>  {page + 1} of {nbPages}  </pre>
       {/* <p>{pages} of {nb_pages}</p> */}
-      <a className='toggle-btn' href="#">
+      <a onClick={handleNextChange} className='toggle-btn' href="#">
         Next
       </a>
     </div>

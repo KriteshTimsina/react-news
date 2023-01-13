@@ -6,7 +6,7 @@ const Search = () => {
   const { query, setSearch } = useGlobalContext();
   return (
     <div className="search-container">
-      <form className="input">
+      <form className="input" onSubmit={(e) => e.preventDefault()}>
         <input
           value={query}
           onChange={(e) => setSearch(e.target.value)}

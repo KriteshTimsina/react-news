@@ -14,6 +14,18 @@ export function reducer(state, action) {
                 ...state,
                 query: action.payload
             }
+        case 'INCREMENT':
+            const pagesIncrement = state.page + 1 >= state.nbPages ? 0 : state.page + 1;
+            return {
+                ...state,
+                page: pagesIncrement
+            }
+        case 'DECREMENT':
+            const pagesChange = state.page <= 0 ? 0 : state.page - 1;
+            return {
+                ...state,
+                page: pagesChange
+            }
         default:
             return state;
     }
